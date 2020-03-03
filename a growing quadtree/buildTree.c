@@ -43,3 +43,17 @@ void makeChildren( Node *parent ) {
 
   return;
 }
+
+void growTree( Node *node )
+{
+	int i;
+
+  if( node->child[0] == NULL )
+      makeChildren( node );
+  else {
+    for ( i=0; i<4; ++i ) {
+		  growTree( node->child[i] );
+    }
+  }
+  return;
+}

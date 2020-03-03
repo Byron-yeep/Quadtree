@@ -24,6 +24,7 @@ int main( int argc, char **argv ) {
   makeChildren( head->child[1]->child[1] );
   makeChildren( head->child[1]->child[1]->child[1] );
   
+  growTree( head );
 
   // print the tree for Gnuplot
 	writeTree( head );
