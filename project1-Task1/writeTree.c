@@ -25,7 +25,7 @@ void writeNode( FILE *fp, Node *node ) {
 
   int i;
 
-  if( node->child[0] == NULL )
+  if ( node->child[0] == NULL )
     printOut( fp, node );
   else {
     for ( i=0; i<4; ++i ) {

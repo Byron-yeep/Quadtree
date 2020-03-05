@@ -1,11 +1,11 @@
 
 #include "stdio.h"
 #include "stdlib.h"
-#include "math.h"
 
 #include "treeStructure.h"
 #include "buildTree.h"
 #include "writeTree.h"
+#include "destroyTree.h"
 
 // main
 
@@ -24,6 +24,7 @@ int main( int argc, char **argv ) {
   makeChildren( head->child[1]->child[1] );
   makeChildren( head->child[1]->child[1]->child[1] );
   
+  // make all leaf nodes have new children
   growTree( head );
 
   // print the tree for Gnuplot

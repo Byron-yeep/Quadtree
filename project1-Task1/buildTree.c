@@ -44,11 +44,13 @@ void makeChildren( Node *parent ) {
   return;
 }
 
+// make all leaf nodes make children
+
 void growTree( Node *node )
 {
 	int i;
 
-  if( node->child[0] == NULL )
+  if ( node->child[0] == NULL )
       makeChildren( node );
   else {
     for ( i=0; i<4; ++i ) {
@@ -57,3 +59,6 @@ void growTree( Node *node )
   }
   return;
 }
+
+
+
