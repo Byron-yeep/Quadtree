@@ -4,7 +4,7 @@
 EXE_DIR = .
 EXE = $(EXE_DIR)/basicQuadtree
 
-SRC= main.c buildTree.c writeTree.c
+SRC= main.c buildTree.c writeTree.c destroyTree.c
 
 # generic build details
 
@@ -31,7 +31,8 @@ clean:
 
 # dependencies
 
-main.o:  main.c treeStructure.h buildTree.h writeTree.h
+main.o:  main.c treeStructure.h buildTree.h writeTree.h destroyTree.h
 buildTree.o: buildTree.c buildTree.h treeStructure.h
 writeTree.o: writeTree.c writeTree.h treeStructure.h
+destroyTree.o: destroyTree.c destroyTree.h treeStructure.h
 

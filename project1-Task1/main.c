@@ -28,7 +28,10 @@ int main( int argc, char **argv ) {
   growTree( head );
 
   // print the tree for Gnuplot
-	writeTree( head );
+  writeTree( head );
+  
+  // free all nodes 
+  destroyTree( head );
 
   return 0;
 }
