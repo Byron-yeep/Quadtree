@@ -35,22 +35,22 @@ int main( int argc, char **argv ) {
 	//removeChildren( head->child[1] );
 	
 	// [Task 3]determine the value of flag
-	compareValue( head );
 	
 	int count[2] = {0, 0};
+	int maxLevel = 6;
 	
 	// [Task 3] makeChild or removeChild
-	//makeOrRemove( head, count );
+	//makeOrRemove( head, count, maxLevel );
 	
 	// [Task 3-extended] makeChild or removeChild
-	int maxLevel = 6;
+	//maxLevel = 6;
 	
 	//ERROR //printf("Please enter the value of maxLevel: ");
 	//ERROR //scanf("&d", &maxLevel);
 	
 	adapt( head, count, maxLevel );
 	
-	printf("The number of added nodes: %d.\nThe number of removed nodes: %d.", count[0], count[1]);
+	printf("The number of all added nodes: %d.\nThe number of all removed nodes: %d.\n", count[0], count[1]);
 
 	// print the tree for Gnuplot
 	writeTree( head );

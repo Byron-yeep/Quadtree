@@ -8,6 +8,6 @@
 
 // Complete Task-3. 3/7
 
-// Complete Task-4. 3/8
+// Complete Task-3(extended). 3/8
 
 Check memory: valgrind --tool=memcheck --leak-check=full ./basicQuadtree

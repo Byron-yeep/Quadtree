@@ -49,32 +49,33 @@ void compareValue( Node *node ) {
 
 // Change structure according to flag 
 
-void makeOrRemove( Node *node, int count[2] ) {
-	if(judgeLeaf( node ) == 1) {
-		if(node->flag == 1) {
-			makeChildren( node );
-			count[0] += 4;
-		}
-	}
-	else {
-		int num = 0;
-		int n;
+void makeOrRemove( Node *node, int count[2], int maxLevel ) {	
+		compareValue( node );
 		
-		for( n = 0; n < 4; n++) 
-			if(node->child[n]->flag == -1)
-				num++;
-		
-		if(num == 4) {
-			removeChildren( node );
-			count[1] += 4;
+		if(judgeLeaf( node ) == 1) {
+			if(node->flag == 1 && node->level < maxLevel) {
+				makeChildren( node );
+				count[0] += 4;
+			}	
 		}
+		else {
+			int num = 0;
+			int n;
 		
-		if(judgeLeaf( node ) == 0) {
-			for(n=0; n < 4; n++) 			
-				makeOrRemove( node->child[n], count );
+			for( n = 0; n < 4; n++) 
+				if(node->child[n]->flag == -1)
+					num++;
+		
+			if(num == 4) {
+				removeChildren( node );
+				count[1] += 4;
+			}
+		
+			if(judgeLeaf( node ) == 0) {
+				for(n=0; n < 4; n++) 			
+					makeOrRemove( node->child[n], count, maxLevel );
+			}
 		}
-	}
-	
 	return;
 }
 
@@ -87,44 +88,22 @@ int judgeLeaf( Node *node ) {
 		return 0;
 }
 
-// Plus a function about maxLevel
+// Keep changing the quadtree until nothing has changed
 
 void adapt( Node *node, int count[2], int maxLevel ) {
-	if(judgeLeaf( node ) == 1) {
-		if(node->flag == 1) 
-			addChildren( node, count, maxLevel );
-	}
-	else {
-		int num = 0;
-		int n;
-		
-		for( n = 0; n < 4; n++) {
-			if(node->child[n]->flag == -1)
-				num++;
-		}
-		if(num == 4) {
-			removeChildren( node );
-			count[1] += 4;
-		}
-		
-		if(judgeLeaf( node ) == 0) {
-			for(n=0; n < 4; n++) 			
-				adapt( node->child[n], count, maxLevel );
-		}
-	}
+	int precount[2];
+	int dcount[2];
 	
-	return;
-}
+	precount[0] = count[0];
+	precount[1] = count[1];
+	makeOrRemove( node, count, maxLevel );
+	dcount[0] = count[0]-precount[0];
+	dcount[1] = count[1]-precount[1];
+	printf("The number of added nodes: %d.\nThe number of removed nodes: %d.\n\n", dcount[0], dcount[1]);
+	
+	if(dcount[0] == 0 && dcount[1] == 0) {}
+	else
+		adapt( node, count, maxLevel );
 
-// Make children until achieve the maxLevel
-
-void addChildren( Node *node, int count[2], int maxLevel ) {
-	int i;
-	if(node->level < maxLevel) {	
-		makeChildren( node );
-		count[0] += 4;
-		for(i = 0; i < 4; i++)
-			addChildren( node->child[i], count, maxLevel);
-	}
 	return;
 }
