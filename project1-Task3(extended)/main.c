@@ -34,21 +34,18 @@ int main( int argc, char **argv ) {
 	// [Task 2]remove children(all children are leaf nodes) 
 	//removeChildren( head->child[1] );
 	
-	// [Task 3]determine the value of flag
-	
+	// Make a count
 	int count[2] = {0, 0};
-	int maxLevel = 6;
 	
 	// [Task 3] makeChild or removeChild
-	//makeOrRemove( head, count, maxLevel );
+	//makeOrRemove( head, count );
 	
-	// [Task 3-extended] makeChild or removeChild
-	//maxLevel = 6;
+	// [Task 3-extended]
 	
 	//ERROR //printf("Please enter the value of maxLevel: ");
 	//ERROR //scanf("&d", &maxLevel);
 	
-	adapt( head, count, maxLevel );
+	adapt( head, count );
 	
 	printf("The number of all added nodes: %d.\nThe number of all removed nodes: %d.\n", count[0], count[1]);
 

@@ -31,6 +31,7 @@ double value( double x, double y, double time ) {
 void compareValue( Node *node ) {
 	int i;
 	double n;
+	
 	if(judgeLeaf( node ) == 1) {
 		n = nodeValue( node, 0.0 );
 		if(n > 0.5) 
@@ -49,15 +50,17 @@ void compareValue( Node *node ) {
 
 // Change structure according to flag 
 
-void makeOrRemove( Node *node, int count[2], int maxLevel ) {	
+void makeOrRemove( Node *node, int count[2] ) {	
 		compareValue( node );
 		
+		// Add children
 		if(judgeLeaf( node ) == 1) {
 			if(node->flag == 1 && node->level < maxLevel) {
 				makeChildren( node );
 				count[0] += 4;
 			}	
 		}
+		// Remove children
 		else {
 			int num = 0;
 			int n;
@@ -73,7 +76,7 @@ void makeOrRemove( Node *node, int count[2], int maxLevel ) {
 		
 			if(judgeLeaf( node ) == 0) {
 				for(n=0; n < 4; n++) 			
-					makeOrRemove( node->child[n], count, maxLevel );
+					makeOrRemove( node->child[n], count );
 			}
 		}
 	return;
@@ -90,20 +93,22 @@ int judgeLeaf( Node *node ) {
 
 // Keep changing the quadtree until nothing has changed
 
-void adapt( Node *node, int count[2], int maxLevel ) {
+void adapt( Node *node, int count[2] ) {
 	int precount[2];
 	int dcount[2];
 	
 	precount[0] = count[0];
 	precount[1] = count[1];
-	makeOrRemove( node, count, maxLevel );
+	
+	makeOrRemove( node, count );
+	// Check whether counts have changes or not
 	dcount[0] = count[0]-precount[0];
 	dcount[1] = count[1]-precount[1];
 	printf("The number of added nodes: %d.\nThe number of removed nodes: %d.\n\n", dcount[0], dcount[1]);
 	
 	if(dcount[0] == 0 && dcount[1] == 0) {}
 	else
-		adapt( node, count, maxLevel );
+		adapt( node, count );
 
 	return;
 }

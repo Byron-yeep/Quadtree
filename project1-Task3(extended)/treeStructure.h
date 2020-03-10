@@ -1,4 +1,6 @@
 
+#define maxLevel 6
+
 // tree data structure
 
 struct qnode {
